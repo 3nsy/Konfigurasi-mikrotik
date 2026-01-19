@@ -1,0 +1,23 @@
+Langkah-langkah Konfigurasi Dasar MikroTik
+Koneksi Awal & Login
+Hubungkan komputer ke MikroTik dengan kabel LAN (misal port 2).
+Buka aplikasi Winbox (unduh dari Mikrotik.com).
+Klik tab Neighbors, pilih MAC Address MikroTik Anda, lalu klik Connect (gunakan default admin/kosong password).
+Opsi: Reset konfigurasi awal: System > Reset Configuration > No Default Configuration.
+Setting Koneksi Internet (WAN)
+DHCP Client (Otomatis): IP > DHCP Client > +. Pilih interface WAN (misal ether1), Apply/OK. MikroTik akan dapat IP otomatis dari ISP.
+IP Manual & Default Route: IP > Addresses (tambahkan IP Public), IP > Routes (tambahkan default route dengan gateway IP ISP), IP > DNS (tambahkan DNS seperti 8.8.8.8).
+Tes Internet: Coba Ping 8.8.8.8 di New Terminal untuk memastikan koneksi internet sudah ada.
+Setting Jaringan Lokal (LAN)
+IP Address LAN: IP > Addresses > +. Masukkan IP untuk LAN (misal 192.168.1.1/24) di interface LAN (misal ether2), Apply/OK.
+DHCP Server (Otomatis untuk Klien): IP > DHCP Server > DHCP Setup. Pilih interface LAN (ether2), ikuti wizard, tentukan range IP (misal 192.168.1.2-192.168.1.254).
+Setting Firewall NAT (Masquerade)
+IP > Firewall > NAT > +.
+Chain: srcnat. Out. Interface: ether1 (interface WAN).
+Action tab: Pilih masquerade, lalu OK.
+Setting Wireless (Jika Ada)
+Wireless > Wireless Interfaces. Double-click wlan1, centang AP Bridge, set SSID (nama WiFi), Mode: ap bridge, Security Profile: default, lalu klik Apply/OK.
+IP > Addresses > +. Beri IP untuk wlan1 (misal 192.168.88.1/24), Apply/OK.
+IP > DHCP Server > DHCP Setup. Pilih interface wlan1, ikuti wizard.
+Tes Koneksi
+Hubungkan perangkat ke port LAN atau WiFi, cek apakah mendapatkan IP dan bisa browsing. 
